@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "950cfcda-5151-4080-b892-6a059f919910",
+		"name": "Mini_Asssignment 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Verifying the User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Checking Https \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Checking Content-Type\r",
+							"pm.test('Response has a valid Content-Type header', function() {\r",
+							"  pm.response.to.have.header('content-type');\r",
+							"  pm.expect(pm.response.headers.get('content-type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"//Checking Response Time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Checking User id \",function () {\r",
+							"    \r",
+							"    var jsonData = pm.response.json();\r",
+							"    for(i=0; i<jsonData.length;i++){\r",
+							"        \r",
+							"        if (jsonData[i].userId == 4 && jsonData[i].id== 40) {\r",
+							"            return true\r",
+							"        }\r",
+							"    }return false\r",
+							"   \r",
+							"});\r",
+							"\r",
+							"//checking String\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for(i=0; i<jsonData.length;i++){\r",
+							"        if(typeof(jsonData[i].title)!=(typeof(\"String\"))){\r",
+							"                return false\r",
+							"        }\r",
+							"    }return true\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{BAseURl}}/posts/",
+					"host": [
+						"{{BAseURl}}"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating_values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Checking Https \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Checking Content-Type\r",
+							"pm.test('Response has a valid Content-Type header', function() {\r",
+							"  pm.response.to.have.header('content-type');\r",
+							"  pm.expect(pm.response.headers.get('content-type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"//Checking Response Time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"//Testing creation\r",
+							"pm.test(\"Sucessfully_created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"{{name}}\",\r\n    \"job\" : \"{{Job}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verifying the data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Checking Https \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Checking Content-Type\r",
+							"pm.test('Response has a valid Content-Type header', function() {\r",
+							"  pm.response.to.have.header('content-type');\r",
+							"  pm.expect(pm.response.headers.get('content-type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"//Checking Response Time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//verifying the value\r",
+							"pm.test(\"Verifying the update\", function () {\r",
+							"    jasondata = pm.response.json\r",
+							"    if ((jasondata.name) == \"Arun\"  && (jasondata[0].job == \"Manager\")){\r",
+							"        return true\r",
+							"    }else{\r",
+							"        return false\r",
+							"    }\r",
+							"\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Arun\",\r\n    \"job\": \"Manager\",\r\n    \"updatedAt\": \"2021-06-11T07:07:25.866Z\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleting the user ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//Checking Https \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Checking Content-Type\r",
+							"pm.test('Response has a valid Content-Type header', function() {\r",
+							"  pm.response.to.have.header('content-type');\r",
+							"  pm.expect(pm.response.headers.get('content-type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"//Checking Response Time\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"//Checking  empty console\r",
+							"pm.test(\"Checking If body is empty\", function(){\r",
+							"\r",
+							"    \r",
+							"\r",
+							"    let response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"    if(response.data == undefined || response.data.length==0) \r",
+							"\r",
+							"    return true;\r",
+							"\r",
+							"\r",
+							"\r",
+							"    return false;\r",
+							"\r",
+							"\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts/1",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BAseURl",
+			"value": "https://jsonplaceholder.typicode.com"
+		}
+	]
+}
