@@ -38,22 +38,21 @@ public class Mini_assignment_1_Rest_assured {
    @Test
    public void put(){
       File jasondata = new File("src//test//java//putdata.json");
-      Response response = given().
+       given().
               baseUri("https://reqres.in/api").
               body(jasondata).
               header("conten-type", "application/json").
               when().
               put("/users").
-              then().extract().response();
-      JSONObject arr = new JSONObject(response.asString());
-      //System.out.println(arr.getJSONObject(0).g("name"));
-      if  (arr.getJSONObject("name").equals("Arun") && arr.getJSONObject("job").equals("Manager")){
-           assertTrue(true);
+              then().statusCode(200).body("name",equalTo("Arun")).body("job",equalTo("Manager"));
+
+   }
+
 
    }
 
 
 
 
-}
+
 
