@@ -2,7 +2,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Excelutil {
-
+    String unregister_name, unregister_email, unregister_pass, unregister_age;
     static int Sheet_no ;
     static String name = null;
     static String email_id = null;
@@ -61,6 +61,7 @@ public class Excelutil {
         if (value == 2){
             return Login_json(email_id,password);
         }
+
         return Create_user_json(name,email_id,password,age);
 }
 
@@ -97,13 +98,18 @@ public class Excelutil {
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workbook.getSheetAt(0);
             XSSFSheet sheet1 = workbook.getSheetAt(1);
+            XSSFSheet sheet3 = workbook.getSheetAt(3);
             Sheet_no = sheet.getLastRowNum();
            int Sheet2_no = sheet1.getLastRowNum();
+            int Sheet3_no = sheet3.getLastRowNum();
            if (value == 1){
                return Sheet2_no;
            }
             if (value == 0){
                 return Sheet_no;
+            }
+            if (value == 3){
+                return Sheet3_no;
             }
     }catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -203,26 +209,6 @@ public class Excelutil {
     }
 
 
-    public String GET_(int i){
-        String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
-        try {
-            FileInputStream fis = new FileInputStream(Excel_file_path);
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            XSSFRow row = null;
-            XSSFCell cell = null;
-            row = sheet.getRow(i);
-            cell = row.getCell(5);
-            return cell.getStringCellValue();
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }return "unable to fetch";
-
-    }
     public String GET_Task(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -263,6 +249,43 @@ public class Excelutil {
         } catch (IOException e) {
             e.printStackTrace();
         }return Task_json("unable_to_fetch");
+
+    }
+    public JSONObject GET_invalid_user(int i){
+
+        String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
+        try {
+
+            FileInputStream fis = new FileInputStream(Excel_file_path);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(3);
+            XSSFRow row = null;
+            XSSFCell cell = null;
+
+            row = sheet.getRow(i);
+            for(int j = 0; j< row.getRowNum(); j++) {
+                cell = row.getCell(j);
+                if(j==0){
+                    unregister_name = cell.getStringCellValue();
+                }
+                if(j==1){
+                    unregister_email = cell.getStringCellValue();
+                }
+                if(j==2){
+                    unregister_pass = cell.getStringCellValue();
+                }if(j==3){
+                    unregister_age = cell.getStringCellValue();
+                }
+
+
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }return Create_user_json(unregister_name, unregister_email, unregister_pass, unregister_age);
 
     }
     }

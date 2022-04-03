@@ -158,9 +158,9 @@ public class Main_test {
     }
 
     @Test(priority = 7)
-    public void login_without_register(){
-        for (int i=1; i<=excel.Row_no(0);i++) {
-            org.json.simple.JSONObject jd = excel.Get_Data(i,2);
+    public void login_without_registeration(){
+        for (int i=1; i<excel.Row_no(3);i++) {
+            org.json.simple.JSONObject jd = excel.GET_invalid_user(i);
 
             Response response = given().baseUri("https://api-nodejs-todolist.herokuapp.com/user/login").
                     header("content-type","application/json").
