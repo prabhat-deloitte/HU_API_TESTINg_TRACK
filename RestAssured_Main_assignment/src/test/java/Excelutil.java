@@ -180,7 +180,72 @@ public class Excelutil {
         }return "unable to fetch";
 
     }
-    public org.json.simple.JSONObject GET_Task(int i){
+
+    public String GET_User_id(int i){
+        String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
+        try {
+            FileInputStream fis = new FileInputStream(Excel_file_path);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFRow row = null;
+            XSSFCell cell = null;
+            row = sheet.getRow(i);
+            cell = row.getCell(5);
+            return cell.getStringCellValue();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }return "unable to fetch";
+
+    }
+
+
+    public String GET_(int i){
+        String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
+        try {
+            FileInputStream fis = new FileInputStream(Excel_file_path);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFRow row = null;
+            XSSFCell cell = null;
+            row = sheet.getRow(i);
+            cell = row.getCell(5);
+            return cell.getStringCellValue();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }return "unable to fetch";
+
+    }
+    public String GET_Task(int i){
+        String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
+        try {
+            FileInputStream fis = new FileInputStream(Excel_file_path);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(1);
+            XSSFRow row = null;
+            XSSFCell cell = null;
+            row = sheet.getRow(i);
+            cell = row.getCell(0);
+            return cell.getStringCellValue();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }return "unable to fetch";
+
+    }
+
+
+    public org.json.simple.JSONObject SET_Task(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
             FileInputStream fis = new FileInputStream(Excel_file_path);

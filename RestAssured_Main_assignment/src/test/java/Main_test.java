@@ -73,7 +73,7 @@ public class Main_test {
         for (int i=1; i<=excel.Row_no(0);i++) {
             String temp_token = excel.GET_Token(i);
             for (int j=1; j<=excel.Row_no(1);j++) {
-               org.json.simple.JSONObject Task = excel.GET_Task(j);
+               org.json.simple.JSONObject Task = excel.SET_Task(j);
         //File Task = new File("C:\\Users\\praparihar\\IdeaProjects\\Mini_assingment2_Api_Testing\\RestAssured_Main_assignment\\src\\test\\java\\CreateTask.json");
         //String temp_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ5NTMzNzE2YTc0ZTAwMTc0NWZlZWEiLCJpYXQiOjE2NDg5NzI1OTl9.m1zS_tE3LXb4EXQ-lb31Fx7INfsvziTOiGEqTDCCnGc";
         given().baseUri("https://api-nodejs-todolist.herokuapp.com/task").
@@ -119,7 +119,76 @@ public class Main_test {
 
             }
         }
+        @Test(priority = 5)
+    public void Validating_all_Tasks(){
+            for (int i=1; i<=excel.Row_no(0);i++) {
+                String temp_token = excel.GET_Token(i);
+                String User_id = excel.GET_User_id(i);
+            Response response = given().baseUri("https://api-nodejs-todolist.herokuapp.com/task").
+                    header("Authorization", "Bearer " + temp_token).header("content-type","application/json")
+                    .when()
+                    .get()
+                    .then()
+                    .statusCode(200).extract().response();
+                for (int j =0; j<excel.Row_no(1);j++){
+                    String task = excel.GET_Task(j+1);
+            JSONObject arr = new JSONObject(response.asString());
+            String owner = arr.getJSONArray("data").getJSONObject(j).getString("owner");
+            String Description = arr.getJSONArray("data").getJSONObject(j).getString("description");
+            if(owner.equals(User_id) && Description.equalsIgnoreCase(task)){
+                System.out.println(owner + " "+ Description);
+            }
+            else{
+                assertTrue(false);
+            }
+        }}assertTrue(true);
+    }
+
+    @Test(priority = 6)
+    public void Register_with_same_name(){
+        for (int i=1; i<=excel.Row_no(0);i++) {
+                org.json.simple.JSONObject jd = excel.Get_Data(i,1);
+                Response response = given().baseUri("https://api-nodejs-todolist.herokuapp.com/user/register").
+                        header("content-type", "application/json").
+                        body(jd.toJSONString()).
+                        when().
+                        post().
+                        then().statusCode(400).extract().response();
+        }
+    }
+
+    @Test(priority = 7)
+    public void login_without_register(){
+        for (int i=1; i<=excel.Row_no(0);i++) {
+            org.json.simple.JSONObject jd = excel.Get_Data(i,2);
+
+            Response response = given().baseUri("https://api-nodejs-todolist.herokuapp.com/user/login").
+                    header("content-type","application/json").
+                    body(jd.toJSONString()).
+                    when().
+                    post().
+                    then().statusCode(400).extract().response();
+    }
+
 }
+   @Test(priority = 8)
+    public void wrong_request_body(){
+       for (int i=1; i<=excel.Row_no(0);i++) {
+           String temp_token = excel.GET_Token(i);
+           for (int j=1; j<=excel.Row_no(1);j++) {
+               org.json.simple.JSONObject Task = excel.SET_Task(j);
+               //File Task = new File("C:\\Users\\praparihar\\IdeaProjects\\Mini_assingment2_Api_Testing\\RestAssured_Main_assignment\\src\\test\\java\\CreateTask.json");
+               //String temp_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ5NTMzNzE2YTc0ZTAwMTc0NWZlZWEiLCJpYXQiOjE2NDg5NzI1OTl9.m1zS_tE3LXb4EXQ-lb31Fx7INfsvziTOiGEqTDCCnGc";
+               given().baseUri("https://api-nodejs-todolist.herokuapp.com/task").
+                       header("Authorization", "Bearer " + temp_token).header("content-type","application/json").
+                       body("description : hello_task")
+                       .when()
+                       .post()
+                       .then()
+                       .statusCode(400);
+           }}}
+   }
+
 
 
 
