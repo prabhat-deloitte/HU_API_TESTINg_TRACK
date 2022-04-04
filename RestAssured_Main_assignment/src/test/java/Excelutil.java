@@ -18,6 +18,8 @@ public class Excelutil {
     static String age = null;
     static String token = null;
     static String user_id = null;
+
+    //Creating Method for Accessing Excel data
     public static org.json.simple.JSONObject Get_Data(int i, int value){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -65,6 +67,8 @@ public class Excelutil {
         return Create_user_json(name,email_id,password,age);
 }
 
+
+//Creating a Method for converting Creating user Data into JSON Format
   public  static  org.json.simple.JSONObject Create_user_json(String Name,String Email,String Pass,String Age){
         org.json.simple.JSONObject obj = new org.json.simple.JSONObject();
         obj.put("name",Name);
@@ -73,6 +77,8 @@ public class Excelutil {
         obj.put("age",Age);
         return obj;
     }
+
+    //Creating a Method for converting Login Data into JSON Format
     public  static  org.json.simple.JSONObject Login_json(String Email,String Pass){
         org.json.simple.JSONObject obj = new org.json.simple.JSONObject();
 
@@ -81,6 +87,9 @@ public class Excelutil {
 
         return obj;
     }
+
+
+    //Creating a Method for converting Creating Task Data into JSON Format
     public  static  org.json.simple.JSONObject Task_json(String Description){
         org.json.simple.JSONObject obj = new org.json.simple.JSONObject();
 
@@ -89,7 +98,7 @@ public class Excelutil {
         return obj;
     }
 
-
+    //Creating a Method for a getting Row no of required excel sheet
     public static int Row_no(int value){
 
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
@@ -117,6 +126,8 @@ public class Excelutil {
             e.printStackTrace();}
         return Sheet_no;
 }
+
+        //Creating Method for Writing Token in Excel Sheet
        public static void Write_data_token(String Token, int i) {
            String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
            try {
@@ -141,7 +152,7 @@ public class Excelutil {
                e.printStackTrace();
            }
        }
-
+    //Creating Method for Writing id in Excel Sheet
     public static void Write_data_id(String id, int i) {
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -166,6 +177,8 @@ public class Excelutil {
             e.printStackTrace();
         }
     }
+
+    // Creating Method for Getting Token from Excel Sheet
     public String GET_Token(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -187,6 +200,9 @@ public class Excelutil {
 
     }
 
+
+
+    //Creating Method for Getting User_id
     public String GET_User_id(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -208,7 +224,7 @@ public class Excelutil {
 
     }
 
-
+//Creating Method for Getting Task from Excel Sheet
     public String GET_Task(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -230,7 +246,7 @@ public class Excelutil {
 
     }
 
-
+    //Creating Method for Posting Task in api using Excel
     public org.json.simple.JSONObject SET_Task(int i){
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");
         try {
@@ -251,6 +267,8 @@ public class Excelutil {
         }return Task_json("unable_to_fetch");
 
     }
+
+    //Creating a Method for Getting Non registered User details
     public JSONObject GET_invalid_user(int i){
 
         String Excel_file_path = ("C:\\Users\\praparihar\\Desktop\\Database.xlsx");

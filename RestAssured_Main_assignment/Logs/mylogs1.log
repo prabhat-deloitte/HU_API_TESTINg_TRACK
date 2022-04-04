@@ -1,0 +1,10 @@
+[INFO ] 2022-04-04 09:35:34.240 [main] log4j_file - The Test C:\Users\praparihar\IdeaProjects\Main_Assignment_Selenium_Track started
+[INFO ] 2022-04-04 09:35:38.864 [main] log4j_file - The create_user is successful
+[INFO ] 2022-04-04 09:35:40.732 [main] log4j_file - The Login is successful
+[INFO ] 2022-04-04 09:36:16.033 [main] log4j_file - The Creating_Tasks is successful
+[INFO ] 2022-04-04 09:36:21.324 [main] log4j_file - The Validating_paging is successful
+[INFO ] 2022-04-04 09:36:24.729 [main] log4j_file - The Validating_all_Tasks is successful
+[INFO ] 2022-04-04 09:36:26.269 [main] log4j_file - The Register_with_same_name is successful
+[INFO ] 2022-04-04 09:36:26.310 [main] log4j_file - The login_without_registeration is successful
+[INFO ] 2022-04-04 09:36:54.056 [main] log4j_file - The wrong_request_body is successful
+[INFO ] 2022-04-04 09:36:54.903 [main] log4j_file - The Testing is Completed
